@@ -80,15 +80,19 @@
               <br>
             <p class="card-text"> Temperature: {{temp}} ℃</p>
             <p class="card-text"> Humidity: {{hum}} %</p>
-            
+            {{#if hour }}
+             <span style="font-size: 12px; margin-left: 135px;margin-bottom:-100px;">Last updated {{hour}}:{{minutes}} </span>
+            {{/if}} 
             </div>
             
           </div>
-          
+         
         </div>
+        
      
+            
       </div>
-      
+  
 
 
     {{else}}
