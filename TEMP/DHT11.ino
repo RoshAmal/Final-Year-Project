@@ -88,7 +88,7 @@ void loop() {
     char temp[20];
     char hum[20];
 
-    //function to conver to string
+    //function to convert to string
     
    sprintf(temp, "%f", t);//make the number into string using sprintf function
    sprintf(hum, "%f", h);
