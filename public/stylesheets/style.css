@@ -23,3 +23,12 @@
   
   background:rgba(205,206,255,0.1);
 }
+
+body  {
+  background-image: url("/images/pexels-artem-podrez-6279112.jpg") ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ 
+}
