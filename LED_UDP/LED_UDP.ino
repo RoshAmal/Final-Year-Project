@@ -45,11 +45,11 @@ void setup() {
   UDP.begin(UDP_PORT);
   
   //sendind ip ipaddres append with LED to server
-  int cb = udp.parsePacket();
+  int cb = UDP.parsePacket();
       {
-        udp.beginPacket(ClientIP, 3000);
-        udp.write("LED")
-        udp.write(ipaddress); //Send ipaddress to server
+        UDP.beginPacket(ClientIP, 3000);
+        UDP.write("LED");
+        UDP.write(ipaddress); //Send ipaddress to server
       } 
 }
 
