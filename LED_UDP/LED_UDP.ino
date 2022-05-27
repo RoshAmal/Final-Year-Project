@@ -44,16 +44,18 @@ void setup() {
 
   UDP.begin(UDP_PORT);
   
+  
+}
+
+void loop() {
+
   //sendind ip ipaddres append with LED to server
   int cb = UDP.parsePacket();
       {
         UDP.beginPacket(ClientIP, 3000);
-        UDP.write("LED");
         UDP.write(ipaddress); //Send ipaddress to server
+        UDP.write("LED");
       } 
-}
-
-void loop() {
 
   int packetSize = UDP.parsePacket();
   if (packetSize)
