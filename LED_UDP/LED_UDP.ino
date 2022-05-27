@@ -11,7 +11,7 @@ char sendoff[]="led is off";
 
 char lon[]="ledon";
 char loff[]="ledoff";
-
+char ipaddress[255];
 
 IPAddress ClientIP(192,168,43,141);  //specify the ip of server here.....
 
@@ -37,11 +37,10 @@ void setup() {
   Serial.println(WiFi.localIP());
   delay(3000);
   IPAddress ip = WiFi.localIP();
-  char led[]="LED/";
         
   //ipaddress=WiFi.localIP().toString().c_str();
   sprintf(ipaddress, "%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
-  strcat(LED,ipaddress);//append "LED" to ippaddress
+  
 
   UDP.begin(UDP_PORT);
   
@@ -49,7 +48,8 @@ void setup() {
   int cb = udp.parsePacket();
       {
         udp.beginPacket(ClientIP, 3000);
-        udp.write(LED); //Send ipaddress to server
+        udp.write("LED")
+        udp.write(ipaddress); //Send ipaddress to server
       } 
 }
 
