@@ -25,11 +25,7 @@
 }
 
 body  {
-  background-image: url("/images/pexels-artem-podrez-6279112.jpg") ;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+ background-color: #f5f5f5;
   
  
 }
