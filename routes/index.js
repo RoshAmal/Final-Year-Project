@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var dgram = require('dgram');
-const client = dgram.createSocket('udp4');
+var client = dgram.createSocket('udp4');
 const { route } = require('express/lib/application');
 var server = dgram.createSocket('udp4');
 var temp,hum,d1;
 var minutes,hour = 0;
-import dgram from 'node:dgram';
-import { Buffer } from 'node:buffer';
+//import dgram from 'node:dgram';
+//import { Buffer } from 'node:buffer';
 
 
 
@@ -20,13 +20,13 @@ irs:'192.168.0.300',
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-
+  console.log("message re "+list['tem'])
   server.on('message',function(msg, rinfo){
   d1 = new Date();  
-  var key = msg.slice(15, 17);
-  dk[key]=msg.slice(0,14)
-  temp = msg.slice(18,20);
-  hum = msg.slice(22,24);
+  var key = msg.slice(13, 16);
+  list[key]=msg.slice(0,13)
+  temp = msg.slice(16,18);
+  hum = msg.slice(25,27);
   console.log("message recived is "+msg)
   hour = d1.getHours();
   minutes = d1.getMinutes();
@@ -39,13 +39,14 @@ router.get('/', function(req, res, next) {
 router.post('/ledstatus', function(req, res, next) {
   console.log(req.body.led)
  
-led= list['led']
+led=String(list['led'])
 const message = Buffer.from(req.body.led);
-client.connect(1234, led, (err) => {
-  client.send(message, (err) => {
-    client.close();
-  });
-});
+const client = dgram.createSocket('udp4');
+client.send(message, 1234, led, (err) => {
+  client.close();
+}
+)
+
   res.redirect('/')
 })
 
