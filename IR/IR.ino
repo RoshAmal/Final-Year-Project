@@ -1,9 +1,12 @@
- 
+#include <ESP8266WiFi.h>
+#include <WiFiUdp.h>
+
   #define WIFI_SSID "Vyshnav"
   int val =0;
   const int IR =13; //D7 PIN
   int select=0;
   char ipaddress[255];
+  char c[5]="n";
   IPAddress ClientIP(192,168,1,202);  //specify the ip of server here.....
   WiFiUDP UDP;
 
@@ -38,15 +41,23 @@ void loop() {
     Serial.println("1");
   }
   else
-    Serial.println("0");//object detected by ir
+    {
+      Serial.println("0");//object detected by ir
+      select=0;
+    }
 
   //sendind ip ipaddres append with LED to server
-
+  if(select == 0)
+    c[0]='y';
+  else
+    c[0]='n';
+    
   int cb = UDP.parsePacket();
       {
         UDP.beginPacket(ClientIP, 3000);
         UDP.write(ipaddress); //Send ipaddress to server
         UDP.write("irs");
+        UDP.write(c);
         UDP.endPacket();
         delay(1000);
       } 
