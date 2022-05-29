@@ -20,7 +20,7 @@ irs:'192.168.0.300',
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  console.log("message re "+list['tem'])
+  console.log("message re "+list['irs'])
   server.on('message',function(msg, rinfo){
   d1 = new Date();  
   var key = msg.slice(13, 16);
@@ -37,8 +37,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/ledstatus', function(req, res, next) {
-  console.log(req.body.led)
- 
+
+console.log(req.body.led)
 led=String(list['led'])
 const message = Buffer.from(req.body.led);
 const client = dgram.createSocket('udp4');

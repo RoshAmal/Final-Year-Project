@@ -6,11 +6,11 @@
   
 // Set WiFi credentials
 const char *ssid = "Vyshnav";
-const char *pass = "123454321";
+//const char *pass = "123454321";
 unsigned int localPort = 3000; // local port to listen for UDP packets
 
 
-IPAddress ClientIP(192,168,237,253);
+IPAddress ClientIP(192,168,1,202);
       
 #define DHTPIN 0
 #define DHTTYPE DHT11
@@ -21,7 +21,7 @@ float t = 0.0;
 float h = 0.0;
 char ipaddress[255];
 char packetBuffer[255];
-char replyBuffer[255] = "Hi there ";
+char replyBuffer[255] = "tem";
 char macaddress[255];
 
 WiFiUDP udp;
@@ -35,7 +35,7 @@ void setup() {
   pinMode(D2 ,OUTPUT);
   
   // Begin WiFi
-  WiFi.begin(ssid, pass);
+  WiFi.begin(ssid);
   
   
   // Loop continuously while WiFi is not connected
@@ -88,7 +88,7 @@ void loop() {
     char temp[20];
     char hum[20];
 
-    //function to convert to string
+    //function to conver to string
     
    sprintf(temp, "%f", t);//make the number into string using sprintf function
    sprintf(hum, "%f", h);
@@ -97,6 +97,7 @@ void loop() {
       {
         udp.beginPacket(ClientIP, 3000);
         udp.write(ipaddress); //Send one byte to ESP8266
+        udp.write(replyBuffer);
         udp.write(temp);
         udp.write(hum);
         udp.endPacket();

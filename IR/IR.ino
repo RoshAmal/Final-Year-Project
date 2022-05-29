@@ -51,7 +51,7 @@ void loop() {
   int cb = udp.parsePacket();
       {
         udp.beginPacket(ClientIP, 3000);
-        udp.write(val); //Send one byte to ESP8266
+        udp.write("34"); //Send one byte to ESP8266
         udp.write("IRS");
         udp.endPacket();
         delay(1000);
