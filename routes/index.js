@@ -3,9 +3,11 @@ var router = express.Router();
 var dgram = require('dgram');
 var client = dgram.createSocket('udp4');
 const { route } = require('express/lib/application');
+const { clear } = require('console');
 var server = dgram.createSocket('udp4');
 var temp,hum,d1;
 var minutes,hour = 0;
+var person;
 //import dgram from 'node:dgram';
 //import { Buffer } from 'node:buffer';
 
@@ -24,17 +26,35 @@ router.get('/', function(req, res, next) {
   server.on('message',function(msg, rinfo){
   d1 = new Date();  
   var key = msg.slice(13, 16);
-  list[key]=msg.slice(0,13)
-  temp = msg.slice(16,18);
+  list[key]=msg.slice(0,13);
+  if(key=="tem")
+  {temp = msg.slice(16,18);
   hum = msg.slice(25,27);
-  console.log("message recived is "+msg)
   hour = d1.getHours();
-  minutes = d1.getMinutes();
+  minutes = d1.getMinutes();}
+      //console.log("mes"+msg.slice(16,17))
+  console.log("key"+key+"and"+msg.slice(16,17))
+  if(key=="irs" && msg.slice(16,17)=="y")
+      person="yes"
+  else
+      {
+      person=undefined
+      
+     // res.render('index', {temp,hum,hour,minutes,person});
+    }
+  console.log("message recived is "+msg+person)
+   
   });
 
-   
-   res.render('index', {temp,hum,hour,minutes});
+   res.render('index', {temp,hum,hour,minutes,person});
 });
+
+//about.html
+router.get('/about', function(req, res, next) {
+  res.render('about');
+});
+  
+
 
 router.post('/ledstatus', function(req, res, next) {
 
