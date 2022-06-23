@@ -3,7 +3,6 @@ import pandas as pd
 from keras.models import load_model
 
 data = load_model("model.h5") 
-#lst=data["model"]
 
 df=pd.read_csv("DDOS1.csv")
 features = ['Fwd Pkt Len Std', 'Fwd Pkt Len Mean',
